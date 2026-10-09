@@ -1,0 +1,65 @@
+@import "tailwindcss";
+
+/* The pharmacy's brand colour is injected at runtime as --brand (see app/layout.tsx).
+   All other shades are derived from it, so one setting re-themes the whole app. */
+:root {
+  --brand: #059669;
+}
+
+@theme inline {
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --color-brand-50: color-mix(in oklab, var(--brand) 8%, white);
+  --color-brand-100: color-mix(in oklab, var(--brand) 16%, white);
+  --color-brand-500: color-mix(in oklab, var(--brand) 85%, white);
+  --color-brand-600: var(--brand);
+  --color-brand-700: color-mix(in oklab, var(--brand) 85%, black);
+  --color-brand-800: color-mix(in oklab, var(--brand) 70%, black);
+}
+
+body {
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+/* Custom smooth thin scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e1 transparent;
+}
+
+/* No spinner arrows: quantities and prices are typed, and the arrows hide the value in small boxes */
+input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  body {
+    background: white;
+  }
+  @page {
+    margin: 4mm;
+  }
+}
